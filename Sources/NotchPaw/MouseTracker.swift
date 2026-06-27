@@ -1,10 +1,13 @@
 import AppKit
 
-/// Watches global + local mouse movement (event-driven, no polling) and reports
-/// the cursor location in global screen coordinates. Mouse monitors do not
-/// require any special permission.
+/// Watches global + local mouse movement and right-clicks (event-driven, no
+/// polling) and reports them in global screen coordinates. Global monitors
+/// OBSERVE events without consuming them, so they never block the underlying
+/// app. Mouse monitors do not require any special permission.
 final class MouseTracker {
     var onMove: ((CGPoint) -> Void)?
+    /// Fired on a right-click (or ctrl-click). Does not consume the event.
+    var onContextClick: ((CGPoint) -> Void)?
 
     private var monitors: [Any] = []
 
@@ -15,6 +18,15 @@ final class MouseTracker {
         }) { monitors.append(m) }
         if let m = NSEvent.addLocalMonitorForEvents(matching: moveMask, handler: { [weak self] e in
             self?.onMove?(NSEvent.mouseLocation)
+            return e
+        }) { monitors.append(m) }
+
+        let clickMask: NSEvent.EventTypeMask = [.rightMouseDown]
+        if let m = NSEvent.addGlobalMonitorForEvents(matching: clickMask, handler: { [weak self] _ in
+            self?.onContextClick?(NSEvent.mouseLocation)
+        }) { monitors.append(m) }
+        if let m = NSEvent.addLocalMonitorForEvents(matching: clickMask, handler: { [weak self] e in
+            self?.onContextClick?(NSEvent.mouseLocation)
             return e
         }) { monitors.append(m) }
     }

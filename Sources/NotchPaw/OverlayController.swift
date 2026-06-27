@@ -37,17 +37,9 @@ final class OverlayController {
         // Engagement is still judged from the notch line the user actually sees.
         self.activationRefY = geo.shoulder.y - frame.minY
 
-        // The interactive notch zone: the notch cutout + a little below it. This
-        // is the ONLY place the overlay claims clicks (everything else is
-        // click-through), so it never blocks normal interaction.
-        let zoneTop = frame.height
-        let zoneBottom = (geo.shoulder.y - frame.minY) - 8
-        let zone = CGRect(x: minX - 10, y: zoneBottom,
-                          width: (maxX - minX) + 20, height: zoneTop - zoneBottom)
-
         self.pawView = PawView(frame: NSRect(origin: .zero, size: frame.size),
                                notchMinX: minX, notchMaxX: maxX, shoulderY: shoulderY,
-                               notchZone: zone, style: style)
+                               style: style)
         window.contentView = pawView
     }
 
@@ -70,6 +62,17 @@ final class OverlayController {
         pawView.target = v
         pawView.engaged = engaged
         if engaged { pawView.resume() }
+    }
+
+    /// The notch hot zone in GLOBAL screen coords: the notch cutout plus a small
+    /// margin. Used to decide where a right-click opens the picker and where to
+    /// show the contextual cursor. (The overlay itself never consumes clicks.)
+    func notchHotZone() -> CGRect {
+        geometry.notchRect.insetBy(dx: -12, dy: -10)
+    }
+
+    func isInNotchHotZone(globalPoint p: CGPoint) -> Bool {
+        notchHotZone().contains(p)
     }
 
     static func computeGeometry(for screen: NSScreen) -> NotchGeometry {

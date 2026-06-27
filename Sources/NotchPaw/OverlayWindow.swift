@@ -14,9 +14,10 @@ final class OverlayWindow: NSPanel {
         backgroundColor = .clear
         isOpaque = false
         hasShadow = false
-        // The window receives events, but PawView.hitTest only claims the small
-        // notch zone — everywhere else stays click-through.
-        ignoresMouseEvents = false
+        // Fully click-through: the window never intercepts mouse events, so the
+        // paw can never block clicks to apps or menu-bar items underneath it.
+        // The picker is opened by a non-consuming global monitor (AppDelegate).
+        ignoresMouseEvents = true
         isMovable = false
         isReleasedWhenClosed = false
         hidesOnDeactivate = false

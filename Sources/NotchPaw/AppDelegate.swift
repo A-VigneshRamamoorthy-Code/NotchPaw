@@ -12,14 +12,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         currentStyle = loadStyle()
         rebuildOverlay()
 
-        tracker.onMove = { [weak self] p in self?.controller?.handleMouseMoved(globalPoint: p) }
+        tracker.onMove = { [weak self] p in self?.handleMove(p) }
+        tracker.onContextClick = { [weak self] p in self?.handleContextClick(p) }
         tracker.start()
 
         NotificationCenter.default.addObserver(
             self, selector: #selector(screensChanged),
             name: NSApplication.didChangeScreenParametersNotification, object: nil)
 
-        NSLog("NotchPaw running (%@). Click the notch to switch paws or quit.",
+        NSLog("NotchPaw running (%@). Right-click the notch to switch paws or quit.",
               currentStyle.displayName)
     }
 
@@ -37,7 +38,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         controller?.close()
         guard let screen = notchScreen() else { return }
         let c = OverlayController(screen: screen, style: currentStyle)
-        c.pawView.onContextMenu = { [weak self] in self?.showPicker() }
         c.show()
         controller = c
     }
@@ -46,7 +46,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         rebuildOverlay()
     }
 
-    // MARK: - Picker (no status item; opened by clicking the notch)
+    // MARK: - Mouse handling
+
+    private func handleMove(_ p: CGPoint) {
+        controller?.handleMouseMoved(globalPoint: p)
+        // Best-effort hint that you can right-click here. The overlay is fully
+        // click-through, so this can't block anything; the foreground app may
+        // override the cursor, which is fine.
+        if controller?.isInNotchHotZone(globalPoint: p) == true {
+            NSCursor.contextualMenu.set()
+        }
+    }
+
+    /// Right-click → open the picker, but only inside the notch hot zone. The
+    /// global monitor does NOT consume the click, so it never blocks the app
+    /// underneath.
+    private func handleContextClick(_ p: CGPoint) {
+        guard controller?.isInNotchHotZone(globalPoint: p) == true else { return }
+        NSApp.activate(ignoringOtherApps: true)
+        showPicker()
+    }
+
+    // MARK: - Picker (no status item; opened by right-clicking the notch)
 
     private func showPicker() {
         // `at` is in screen coordinates when `in:` is nil; the cursor is at the

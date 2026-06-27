@@ -20,25 +20,17 @@ final class PawView: NSView {
     var notchMaxX: CGFloat
     /// Y of the notch's bottom edge (view coords).
     var shoulderY: CGFloat
-    /// The only interactive region (view coords): hovering shows the contextual
-    /// cursor and a click opens the picker. Everything else is click-through.
-    var notchZone: CGRect
-    /// Called when the user clicks inside the notch zone.
-    var onContextMenu: (() -> Void)?
 
     private var link: CADisplayLink?
     private var lastTime: CFTimeInterval = 0
     private var lastDirty: CGRect = .null
     private var shoulderX: CGFloat
-    private var zoneTracking: NSTrackingArea?
 
-    init(frame: NSRect, notchMinX: CGFloat, notchMaxX: CGFloat, shoulderY: CGFloat,
-         notchZone: CGRect, style: PawStyle) {
+    init(frame: NSRect, notchMinX: CGFloat, notchMaxX: CGFloat, shoulderY: CGFloat, style: PawStyle) {
         self.style = style
         self.notchMinX = notchMinX
         self.notchMaxX = notchMaxX
         self.shoulderY = shoulderY
-        self.notchZone = notchZone
         self.shoulderX = (notchMinX + notchMaxX) / 2
         self.engine = PawEngine(shoulder: CGPoint(x: shoulderX, y: shoulderY), style: style)
         super.init(frame: frame)
@@ -50,32 +42,10 @@ final class PawView: NSView {
     override var isFlipped: Bool { false }
     override var isOpaque: Bool { false }
 
-    // MARK: - Interaction (click-through except the notch zone)
-
-    /// Claim only the notch zone; return nil elsewhere so events pass through.
-    override func hitTest(_ point: NSPoint) -> NSView? {
-        let local = convert(point, from: superview)
-        return notchZone.contains(local) ? self : nil
-    }
-
-    override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
-
-    override func updateTrackingAreas() {
-        super.updateTrackingAreas()
-        if let t = zoneTracking { removeTrackingArea(t) }
-        let t = NSTrackingArea(rect: notchZone,
-                               options: [.cursorUpdate, .mouseEnteredAndExited, .activeAlways],
-                               owner: self, userInfo: nil)
-        addTrackingArea(t)
-        zoneTracking = t
-    }
-
-    override func cursorUpdate(with event: NSEvent) { NSCursor.contextualMenu.set() }
-    override func mouseEntered(with event: NSEvent) { NSCursor.contextualMenu.set() }
-
-    override func mouseDown(with event: NSEvent) { onContextMenu?() }
-    override func rightMouseDown(with event: NSEvent) { onContextMenu?() }
-
+    // The overlay window has `ignoresMouseEvents = true`, so this view never
+    // receives or blocks mouse events — clicks always pass through to whatever
+    // is underneath (apps, menu-bar items), even while the paw is animating.
+    // The picker is opened from a non-consuming global monitor in AppDelegate.
 
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
