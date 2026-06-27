@@ -58,21 +58,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    /// Right-click → open the picker, but only inside the notch hot zone. The
-    /// global monitor does NOT consume the click, so it never blocks the app
-    /// underneath.
+    /// Fired on `.rightMouseUp` inside the notch hot zone. The global monitor
+    /// does NOT consume the click, so it never blocks the app underneath.
     private func handleContextClick(_ p: CGPoint) {
         guard controller?.isInNotchHotZone(globalPoint: p) == true else { return }
-        NSApp.activate(ignoringOtherApps: true)
-        showPicker()
+        // Open on the next runloop turn so the OS finishes delivering the
+        // right-click sequence first; otherwise the menu opens in
+        // press-drag-release mode and dismisses itself immediately.
+        DispatchQueue.main.async { [weak self] in
+            NSApp.activate(ignoringOtherApps: true)
+            self?.showPicker(at: p)
+        }
     }
 
     // MARK: - Picker (no status item; opened by right-clicking the notch)
 
-    private func showPicker() {
-        // `at` is in screen coordinates when `in:` is nil; the cursor is at the
-        // notch, so the menu drops down right from there.
-        buildMenu().popUp(positioning: nil, at: NSEvent.mouseLocation, in: nil)
+    private func showPicker(at screenPoint: CGPoint) {
+        // `at` is in screen coordinates when `in:` is nil.
+        buildMenu().popUp(positioning: nil, at: screenPoint, in: nil)
     }
 
     private func buildMenu() -> NSMenu {

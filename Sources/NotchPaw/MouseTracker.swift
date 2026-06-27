@@ -21,7 +21,7 @@ final class MouseTracker {
             return e
         }) { monitors.append(m) }
 
-        let clickMask: NSEvent.EventTypeMask = [.rightMouseDown]
+        let clickMask: NSEvent.EventTypeMask = [.rightMouseUp]
         if let m = NSEvent.addGlobalMonitorForEvents(matching: clickMask, handler: { [weak self] _ in
             self?.onContextClick?(NSEvent.mouseLocation)
         }) { monitors.append(m) }
