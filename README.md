@@ -98,39 +98,6 @@ it genuinely helps. Found a bug or want a new critter?
 
 ---
 
-<details>
-<summary><b>🧑‍💻 Build from source (for developers)</b></summary>
-
-<br/>
-
-No Xcode required — just the Swift toolchain (Command Line Tools are enough).
-
-```bash
-git clone https://github.com/A-VigneshRamamoorthy-Code/NotchPaw.git
-cd NotchPaw
-./scripts/build_app.sh release      # → build/NotchPaw.app
-./scripts/make_dmg.sh               # → NotchPaw.dmg (optional)
-```
-
-Run the tests and preview the art headlessly:
-
-```bash
-swift run notchpaw-selftest         # pure-logic checks
-swift run NotchPaw --contact /tmp   # animation contact sheets
-swift run NotchPaw --appicon /tmp/icon.png
-```
-
-**Project layout**
-
-- `Sources/NotchPawCore/` — pure, testable engine: gesture system, Verlet-rope
-  physics, per-animal styles, and all CoreGraphics drawing.
-- `Sources/NotchPaw/` — the AppKit app: transparent notch overlay, mouse
-  tracking, the picker menu, and the app lifecycle.
-- `Sources/notchpaw-selftest/` — a no-XCTest assertion harness.
-- `scripts/` — `build_app.sh` (assemble the `.app`) and `make_dmg.sh`.
-
-</details>
-
 <div align="center">
 <sub>Made with 🐾 and Swift.</sub>
 </div>
