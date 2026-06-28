@@ -144,7 +144,7 @@ group("PawStyle") {
     }
     check(PawStyle.cat.appendage == .paw, "cat is a paw")
     check(PawStyle.catTail.appendage == .tail, "cat tail is a tail")
-    check(PawStyle.allCases.count == 7, "seven styles")
+    check(PawStyle.allCases.count == 8, "eight styles")
 }
 
 group("PawRenderer icons") {

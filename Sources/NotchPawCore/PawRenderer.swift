@@ -394,6 +394,10 @@ private struct PawShape {
         case .cat, .catTail:
             return PawShape(palmW: 34, palmH: 36, toeCount: 4, toeFanR: 19, toeR: 8,
                             toeSpreadDeg: 116, clawLen: 0)
+        case .blackCat:
+            // Same cat geometry, but with the claws unsheathed (amber accent).
+            return PawShape(palmW: 34, palmH: 36, toeCount: 4, toeFanR: 19, toeR: 8,
+                            toeSpreadDeg: 116, clawLen: 4.5)
         case .dog:
             return PawShape(palmW: 40, palmH: 40, toeCount: 4, toeFanR: 22, toeR: 9.5,
                             toeSpreadDeg: 120, clawLen: 5)

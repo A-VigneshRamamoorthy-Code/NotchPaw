@@ -69,7 +69,9 @@ public struct PawBehavior: Equatable, Sendable {
 
 /// The selectable creature styles.
 public enum PawStyle: String, CaseIterable, Sendable {
-    case cat, dog, bunny, fox, bear
+    case cat
+    case blackCat = "black_cat"
+    case dog, bunny, fox, bear
     case catTail = "cat_tail"
     case foxTail = "fox_tail"
 
@@ -83,6 +85,7 @@ public enum PawStyle: String, CaseIterable, Sendable {
     public var displayName: String {
         switch self {
         case .cat: return "Cat"
+        case .blackCat: return "Black cat"
         case .dog: return "Dog"
         case .bunny: return "Bunny"
         case .fox: return "Fox"
@@ -95,6 +98,7 @@ public enum PawStyle: String, CaseIterable, Sendable {
     public var emoji: String {
         switch self {
         case .cat: return "🐱"
+        case .blackCat: return "🐈‍⬛"
         case .dog: return "🐶"
         case .bunny: return "🐰"
         case .fox: return "🦊"
@@ -107,6 +111,7 @@ public enum PawStyle: String, CaseIterable, Sendable {
     public var tagline: String {
         switch self {
         case .cat: return "Quick anticipatory bats."
+        case .blackCat: return "Sleek, stealthy midnight swats."
         case .dog: return "Eager double-tap pawing."
         case .bunny: return "Bouncy little hops."
         case .fox: return "Sly creep, sudden pounce."
@@ -125,6 +130,14 @@ public enum PawStyle: String, CaseIterable, Sendable {
                                strikeSharp: 1.7, anticipation: 0.34, perpAmp: 16,
                                perpCycles: 1, bobAmp: 0, idleSway: 5,
                                pawScale: 0.72, catchRadius: 24)
+        case .blackCat:
+            // Like the cat, but a longer creep and a sharper, snappier pounce.
+            return PawBehavior(maxReach: 154, activationRadius: 190, segments: 4,
+                               tipStiffness: 340, tipDamping: 21, chainDamping: 0.80,
+                               constraintIters: 3, cycle: 0.84, taps: 1, reachBias: 0.55,
+                               strikeSharp: 1.95, anticipation: 0.42, perpAmp: 14,
+                               perpCycles: 1, bobAmp: 0, idleSway: 5,
+                               pawScale: 0.74, catchRadius: 24)
         case .dog:
             return PawBehavior(maxReach: 140, activationRadius: 195, segments: 4,
                                tipStiffness: 230, tipDamping: 15, chainDamping: 0.79,
@@ -175,6 +188,10 @@ public enum PawStyle: String, CaseIterable, Sendable {
         case .cat, .catTail:
             return PawPalette(fur: RGBA(0.55, 0.55, 0.60), pad: RGBA(1.0, 0.62, 0.72),
                               outline: RGBA(0.17, 0.17, 0.19), accent: RGBA(0.38, 0.38, 0.43))
+        case .blackCat:
+            // Inky-black fur, dark slate toe beans, warm amber claws/nails.
+            return PawPalette(fur: RGBA(0.12, 0.12, 0.14), pad: RGBA(0.34, 0.32, 0.32),
+                              outline: RGBA(0.02, 0.02, 0.03), accent: RGBA(0.86, 0.59, 0.31))
         case .dog:
             return PawPalette(fur: RGBA(0.76, 0.55, 0.32), pad: RGBA(0.30, 0.22, 0.20),
                               outline: RGBA(0.22, 0.15, 0.11), accent: RGBA(0.94, 0.88, 0.78))
