@@ -1,76 +1,112 @@
+<div align="center">
+
 # 🐾 NotchPaw
 
-**A playful critter lives under your MacBook notch.** When your cursor wanders up
-near the notch, an animal paw (or tail!) springs out and tries to *catch* it —
-with fluid, springy, genuinely animal-like motion. Move away and it tucks back
-in, sleeping at **0% CPU**.
+### A playful critter lives under your MacBook notch — and it wants to play.
 
-NotchPaw is a tiny, native macOS app. No Dock icon, no menu-bar clutter — it just
-hides under the notch until you come to play.
+Sweep your cursor toward the notch and a furry paw (or a swishing tail) springs
+out to *catch* it, with fluid, springy, genuinely animal-like motion.
+Wander off and it curls back up to sleep at **0% CPU**.
+
+<br/>
+
+[![Download for macOS](https://img.shields.io/badge/Download%20for%20macOS-NotchPaw.dmg-007AFF?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/releases/latest/download/NotchPaw.dmg)
+
+**Free · Open-source · macOS 14+ · Apple Silicon &amp; Intel**
+
+</div>
 
 ---
 
-## ✨ Features
+<div align="center">
 
-- **Catches your cursor** — a Verlet-rope limb springs from the notch point
+### 🎬 See it in action
+
+<video src="https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/raw/main/assets/NotchPaw_Launch.mp4" controls muted loop width="760"></video>
+
+<sub>Video not playing inline? <b><a href="https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/raw/main/assets/NotchPaw_Launch.mp4">▶ Watch the demo</a></b></sub>
+
+</div>
+
+---
+
+## ⬇️ Get NotchPaw
+
+<div align="center">
+
+### 👉 **[Download NotchPaw.dmg](https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/releases/latest/download/NotchPaw.dmg)**
+
+</div>
+
+You're three steps from playing:
+
+1. **Open** the downloaded `NotchPaw.dmg`.
+2. **Drag NotchPaw** into your **Applications** folder.
+3. **Right-click NotchPaw → Open** the first time (see [First launch](#️-first-launch-on-macos) below).
+
+Now sweep your cursor up to the notch to wake the critter. **Hover the notch and
+click** to switch animals or quit. No setup, no account, no menu-bar clutter.
+
+> Looking for older builds? Browse **[all releases](https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/releases)**.
+
+---
+
+## ✨ Why you'll love it
+
+- 🐾 **It catches your cursor.** A Verlet-rope limb springs from the notch point
   nearest your pointer and bats at it with real spring physics.
-- **It's alive** — the critter keeps acting even when your cursor is still
-  (anticipation → strike → follow-through → pause), built on real animation
-  principles, not a simple zoom.
-- **7 critters, each with its own personality:**
-  🐱 Cat · 🐶 Dog · 🐰 Bunny · 🦊 Fox · 🐻 Bear · 🐈 Cat tail · 🦊 Fox tail
-- **Pick your critter** — hover the notch (the cursor turns into a contextual
-  menu) and click for a polished picker with live thumbnails. Your choice is
-  remembered.
-- **Featherweight** — **0% CPU when idle**, ~4–6% only while actively playing
-  (capped at 30fps), ~35 MB RAM.
-- **Invisible by design** — runs as an agent (`LSUIElement`): no Dock icon, no
-  menu-bar icon. It never blocks your clicks — only the small notch zone is
-  interactive.
-- **Native & dependency-free** — pure Swift + AppKit/CoreGraphics. All art is
-  drawn in code (including the app icon).
+- 🎭 **It's actually alive.** The critter keeps acting even when your cursor is
+  still — anticipation → strike → follow-through → pause — built on real
+  animation principles, not a cheap zoom.
+- 🐱 **7 critters, each with personality.** Pick your favorite from a polished
+  menu with live thumbnails — your choice is remembered.
+- 🪶 **Featherweight.** **0% CPU when idle**, ~4–6% only while actively playing
+  (capped at 30 fps), ~35 MB RAM.
+- 👻 **Invisible by design.** Runs as a background agent — no Dock icon, no
+  menu-bar icon. It never blocks your clicks; only the tiny notch zone is live.
+- 🛠️ **Native &amp; dependency-free.** Pure Swift + AppKit/CoreGraphics. Every
+  pixel of art (including the app icon) is drawn in code.
 
 ---
 
-## 📸 Screenshots
-<!-- Add screenshots or a GIF of the paw catching the cursor here -->
-_(Coming soon — drop a GIF of the paw in action.)_
+## 🐾 Meet the critters
+
+🐱 **Cat** · 🐶 **Dog** · 🐰 **Bunny** · 🦊 **Fox** · 🐻 **Bear** · 🐈 **Cat tail** · 🦊 **Fox tail**
+
+Hover the notch (your cursor turns into a little menu indicator) and click to
+switch any time.
 
 ---
 
-## ⬇️ Download
-👉 **[Download the latest release](https://github.com/VigneshRamamoorthy1992/NotchPaw/releases/latest)**
+## ⚠️ First launch on macOS
 
-Requires macOS 14 or later (Apple Silicon or Intel).
+NotchPaw is open-source and ad-hoc signed (not yet notarized), so macOS
+Gatekeeper may block the very first open:
 
----
+> **Right-click NotchPaw → Open → Confirm.**
 
-## 🚀 Install
-1. Download `NotchPaw.dmg`.
-2. Open it.
-3. Drag **NotchPaw** into **Applications**.
-4. Right-click NotchPaw → **Open** (first launch only).
-
-Move your cursor up to the notch to wake the critter. **Hover the notch and
-click** to switch animals or quit.
+You only need to do this once. Requires **macOS 14 (Sonoma) or later**, Apple
+Silicon or Intel.
 
 ---
 
-## ⚠️ macOS Warning
-NotchPaw is open-source and ad-hoc signed (not notarized), so macOS may block the
-first launch:
+## ❤️ Love it?
 
-> **Right-click NotchPaw → Open → Confirm**
-
-You only need to do this once.
+If NotchPaw made you smile, **[⭐ star the repo](https://github.com/A-VigneshRamamoorthy-Code/NotchPaw)** —
+it genuinely helps. Found a bug or want a new critter?
+**[Open an issue](https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/issues)**.
 
 ---
 
-## 🛠 Build from source
+<details>
+<summary><b>🧑‍💻 Build from source (for developers)</b></summary>
+
+<br/>
+
 No Xcode required — just the Swift toolchain (Command Line Tools are enough).
 
 ```bash
-git clone https://github.com/VigneshRamamoorthy1992/NotchPaw.git
+git clone https://github.com/A-VigneshRamamoorthy-Code/NotchPaw.git
 cd NotchPaw
 ./scripts/build_app.sh release      # → build/NotchPaw.app
 ./scripts/make_dmg.sh               # → NotchPaw.dmg (optional)
@@ -84,7 +120,8 @@ swift run NotchPaw --contact /tmp   # animation contact sheets
 swift run NotchPaw --appicon /tmp/icon.png
 ```
 
-### Project layout
+**Project layout**
+
 - `Sources/NotchPawCore/` — pure, testable engine: gesture system, Verlet-rope
   physics, per-animal styles, and all CoreGraphics drawing.
 - `Sources/NotchPaw/` — the AppKit app: transparent notch overlay, mouse
@@ -92,8 +129,8 @@ swift run NotchPaw --appicon /tmp/icon.png
 - `Sources/notchpaw-selftest/` — a no-XCTest assertion harness.
 - `scripts/` — `build_app.sh` (assemble the `.app`) and `make_dmg.sh`.
 
----
+</details>
 
-## ❤️ Feedback
-Found a bug or want a new critter? **Open an issue** — and if NotchPaw made you
-smile, **star the repo** ⭐
+<div align="center">
+<sub>Made with 🐾 and Swift.</sub>
+</div>
