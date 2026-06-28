@@ -8,6 +8,9 @@ ROOT="$(pwd)"
 CONFIG="${1:-release}"
 APP="$ROOT/build/NotchPaw.app"
 BIN_NAME="NotchPaw"
+# Version stamped into the bundle's Info.plist (override via env if needed).
+MARKETING_VERSION="${MARKETING_VERSION:-1.1.0}"
+BUILD_VERSION="${BUILD_VERSION:-2}"
 
 echo "▶ Building ($CONFIG)…"
 swift build -c "$CONFIG" --product "$BIN_NAME"
@@ -38,7 +41,7 @@ else
     echo "  (icon render failed — skipping)"
 fi
 
-cat > "$APP/Contents/Info.plist" <<'PLIST'
+cat > "$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -50,8 +53,8 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
     <key>CFBundleIconFile</key>             <string>AppIcon</string>
     <key>CFBundleIconName</key>             <string>AppIcon</string>
     <key>CFBundlePackageType</key>          <string>APPL</string>
-    <key>CFBundleShortVersionString</key>   <string>1.0</string>
-    <key>CFBundleVersion</key>              <string>1</string>
+    <key>CFBundleShortVersionString</key>   <string>${MARKETING_VERSION}</string>
+    <key>CFBundleVersion</key>              <string>${BUILD_VERSION}</string>
     <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
     <key>LSMinimumSystemVersion</key>       <string>14.0</string>
     <key>NSPrincipalClass</key>             <string>NSApplication</string>
