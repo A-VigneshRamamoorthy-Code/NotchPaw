@@ -1,0 +1,7 @@
+# Code owners for NotchPaw.
+#
+# The repo owner owns every file, so with branch protection's
+# "Require review from Code Owners" enabled, every pull request into a
+# protected branch needs one approval from @A-VigneshRamamoorthy-Code
+# before it can be merged.
+* @A-VigneshRamamoorthy-Code
