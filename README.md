@@ -22,9 +22,9 @@ Wander off and it curls back up to sleep at **0% CPU**.
 
 ### 🎬 See it in action
 
-<video src="https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/raw/main/assets/NotchPaw_Launch.mp4" controls muted loop width="760"></video>
+[![NotchPaw demo — click to watch the full video with sound](assets/NotchPaw_demo.gif)](https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/blob/main/assets/NotchPaw_Launch.mp4)
 
-<sub>Video not playing inline? <b><a href="https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/raw/main/assets/NotchPaw_Launch.mp4">▶ Watch the demo</a></b></sub>
+<sub>▶ The looping preview above plays for everyone — <b><a href="https://github.com/A-VigneshRamamoorthy-Code/NotchPaw/blob/main/assets/NotchPaw_Launch.mp4">click it for the full-quality video with sound</a></b>.</sub>
 
 </div>
 
